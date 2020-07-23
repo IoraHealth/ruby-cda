@@ -4,10 +4,9 @@ module Ccd::AssessmentSectionTemplate
       extend ::Ccd::Dsl
       
       # SHALL contain exactly one [1..1] templateId (CONF:7711) such that it
-      constraint 'template_id', {:cardinality=>"1..1"}
-      
       # SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.2.8" (CONF:10382).
-      constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.2.8"}
+      constraint 'template_id', {:cardinality=>"1..1", :value=>{:root=>"2.16.840.1.113883.10.20.22.2.8"}}
+      constraint 'template_id', {:cardinality=>"1..1", :value=>{:root=>"2.16.840.1.113883.10.20.22.2.8", :extension=>"2014-06-09"}}
       
       # SHALL contain exactly one [1..1] code (CONF:14757).
       constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"51848-0", :display_name=>"Assessments"}}
