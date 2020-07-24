@@ -1,3 +1,7 @@
+- 0.2.7
+
+  - Extensions added for Plan of Care and Assessment sections that the validator tells us are required
+
 - 0.2.6
 
   - Extensions added for Result Organizer and Observation that the validator tells us are required
