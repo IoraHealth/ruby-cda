@@ -1,3 +1,7 @@
+- 0.2.8
+
+  - Relax gem dependency requirements so we can think about Rails 6
+
 - 0.2.7
 
   - Extensions added for Plan of Care and Assessment sections that the validator tells us are required
