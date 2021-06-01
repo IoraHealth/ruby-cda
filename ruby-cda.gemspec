@@ -21,4 +21,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'awesome_print',             '>= 1.7'
   s.add_development_dependency 'rspec',                     '>= 3.5'
   s.add_development_dependency 'rspec-collection_matchers', '>= 1.1'
+  s.add_development_dependency 'rspec_junit_formatter'
 end
