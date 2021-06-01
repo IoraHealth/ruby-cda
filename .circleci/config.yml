@@ -2,14 +2,24 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2 
 
+workflows:
+  version: 2
+  test:
+    jobs:
+      - run_specs
+
 jobs:
-  build:
+  run_specs:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
+      - image: cimg/ruby:2.7.1
+    resource_class: small
     executor: ruby/default
     steps:
       - checkout
       - run:
-          name: Which bundler?
-          command: bundle -v
+          name: Install bundler
+          command: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
       - ruby/bundle-install
+      - run:
+          name: Run specs
+          command: bundle exec rspec
