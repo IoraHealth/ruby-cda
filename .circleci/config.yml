@@ -1,30 +1,32 @@
 version: 2.1
+
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@1.1.3
 
 workflows:
-  version: 2
   test:
     jobs:
-      - run_specs
+      - bundle_audit
+      - rspec
 
 jobs:
-  run_specs:
+  bundle_audit:
     docker:
       - image: cimg/ruby:2.7.1
     resource_class: small
-    executor: ruby/default
     steps:
       - checkout
       - run:
-          name: Install bundler
-          command: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
-      - ruby/bundle-install
+          name: Install bundler-audit
+          command: gem install bundler-audit
       - run:
-          name: Run specs
-          command: bundle exec rspec --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+          name: bundle-audit check
+          command: bundle-audit check --update
+  rspec:
+    docker:
+      - image: cimg/ruby:2.7.1
+    resource_class: small
+    steps:
+      - checkout
+      - ruby/install-deps
+      - ruby/rspec-test
